@@ -79,6 +79,8 @@ int main(int argc, char const *argv[])
      */
     pthread_create(&tid_boton, NULL, hilo_boton, NULL);
 
+    // printf("%ld\n\n", tid_boton); // Imprime el ID del hilo del botón para referencia
+
     printf("Simulador de semáforo iniciado.\n");
     printf("Presione 'b' + Enter para activar el cruce peatonal.\n\n");
 
