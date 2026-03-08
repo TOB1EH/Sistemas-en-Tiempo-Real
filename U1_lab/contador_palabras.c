@@ -11,17 +11,19 @@ int main(int argc, char const *argv[])
 
     do
     {
+        contador = 0; // Reiniciar el contador para cada nueva frase
+
         printf("Ingrese un texto para contar la cantidad de palabras: ");
         fgets(texto, sizeof(texto), stdin);
 
         /*
-        * Contar palabras: La función char palabra = strtok(texto, " \n"); 
-        * toma el texto ingresado y lo divide en "tokens" (subcadenas) usando 
-        * los delimitadores espacio (" ") y salto de línea ("\n"). Es decir, 
-        * separa el texto en palabras, y la variable palabra apunta a la primera 
+        * Contar palabras: La función char palabra = strtok(texto, " \n");
+        * toma el texto ingresado y lo divide en "tokens" (subcadenas) usando
+        * los delimitadores espacio (" ") y salto de línea ("\n"). Es decir,
+        * separa el texto en palabras, y la variable palabra apunta a la primera
         * palabra encontrada.
         * */
-        palabra = strtok(texto, " \n");
+        palabra = strtok(texto, ". \n");
         
         /*
         * El ciclo while (palabra != NULL) se ejecuta mientras 
