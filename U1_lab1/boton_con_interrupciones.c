@@ -1,10 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <signal.h>
 #include <pigpio.h>
 
 #define GPIO_PIN_LED 4 // Numero de pin GPIO donde esta conectado el LED (GPIO4, pin fisico 7 en la Raspberry Pi)
 #define GPIO_PIN_BUTTON 17 // Numero de pin GPIO donde esta conectado el boton (GPIO17, pin fisico 11 en la Raspberry Pi)
+
+/**
+ * @param sig_atomic_t Tipo especial para trabajar con manejadores de señales.
+ * volatile indica al compilador que el valor puede cambiar fuera del flujo principal del programa.
+ * Esto es necesario porque la variable es modificada dentro de una función que maneja señales.
+ */
+volatile sig_atomic_t running = 1;
+
+/**
+ * @brief Manejador para la señal SIGINT (Ctrl+C)
+ * 
+ * Permite al programa limpiar recursos (GPIO) de forma ordenada cuando el usuario 
+ * presiona Ctrl+C, en lugar de terminar abruptamente.
+ * 
+ * @param signal El número de la señal (SIGINT para Ctrl+C)
+ */
+void handle_signal(int signal)
+{
+    printf("\n\nPrograma interrumpido por el usuario. Finalizando...\n");
+    running = 0;
+}
 
 /**
  * @brief Manejador de interrupción para el botón | Esta función se ejecuta cada vez que se detecta un cambio en el estado del botón (presionado o liberado).
@@ -40,6 +62,9 @@ int main(int argc, char const *argv[])
     int pin_led = GPIO_PIN_LED;
     int pin_button = GPIO_PIN_BUTTON;
 
+    // Registrar el manejador de señal para Ctrl+C antes de cualquier operación
+    signal(SIGINT, handle_signal);
+
     // Inicializar la libreria pigpio
     if (gpioInitialise() < 0)
     {
@@ -64,12 +89,13 @@ int main(int argc, char const *argv[])
     gpioSetAlertFuncEx(pin_button, manejador_interrupcion_boton, &pin_led); // Pasar la dirección del pin del LED como datos del usuario para que el manejador pueda acceder a él
 
     // Bucle infinito que mantiene el programa vivo
-    while(1) {
+    while(running) {
         time_sleep(1); // Duerme por 1 segundo, despierta, y vuelve a dormir.
         // Las interrupciones del botón pausarán este sueño automáticamente.
     }
 
     // Terminar la libreria pigpio
     gpioTerminate();
+    printf("Recursos GPIO finalizados correctamente.\n");
     return 0;
 }
