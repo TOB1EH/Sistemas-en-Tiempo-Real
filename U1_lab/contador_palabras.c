@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
         * palabra encontrada.
         * */
         palabra = strtok(texto, ". \n");
-        
+
         /*
         * El ciclo while (palabra != NULL) se ejecuta mientras 
         * que haya palabras para contar. En cada iteración, se 
