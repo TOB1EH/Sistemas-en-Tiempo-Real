@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <pigpio.h>
 
-#define GPIO_PIN_LED 4 // Numero de pin GPIO donde esta conectado el LED (GPIO4, pin fisico 7 en la Raspberry Pi)
+#define GPIO_PIN_LED 23 // Numero de pin GPIO donde esta conectado el LED (GPIO4, pin fisico 7 en la Raspberry Pi)
 #define GPIO_PIN_BUTTON 17 // Numero de pin GPIO donde esta conectado el boton (GPIO17, pin fisico 11 en la Raspberry Pi)
 #define CANTIDAD_MEDICIONES 20 // Definimos una constante para la cantidad de mediciones que queremos realizar antes de hacer el análisis de latencia y jitter
 
@@ -32,7 +32,9 @@ void handle_signal(int signal)
 
 // Variables globales para los datos
 uint32_t latencias[CANTIDAD_MEDICIONES];
-int pulsaciones = 0;
+
+// Contador de pulsaciones para almacenar latencias
+volatile int pulsaciones = 0;
 
 // BANDERAS (Flags) marcadas como 'volatile'
 volatile int flag_imprimir_presionado = 0;
@@ -48,14 +50,12 @@ volatile int flag_analisis_listo = 0;
  * @param user_data Puntero a datos del usuario, en este caso se utiliza para pasar el número de pin del LED que se debe controlar.
  * @return * void
  */
-void manejador_interrupcion_boton(int gpio, int level, uint32_t tick, void *user_data)
+void manejador_interrupcion_boton(int gpio, int level, uint32_t tick)
 {
-    int led = *(int *)user_data; // Obtener el número de pin del LED desde los datos del usuario
-
     if (level == 0) // Flanco de bajada (Botón presionado)
     {
         uint32_t tiempo_accion = gpioTick(); // Capturar tiempo INMEDIATAMENTE
-        gpioWrite(led, 1);                   // Encender LED INMEDIATAMENTE
+        gpioWrite(GPIO_PIN_LED, 1);                   // Encender LED INMEDIATAMENTE
 
         if (pulsaciones < CANTIDAD_MEDICIONES)
         {
@@ -71,7 +71,7 @@ void manejador_interrupcion_boton(int gpio, int level, uint32_t tick, void *user
     }
     else if (level == 1) // Flanco de subida (Botón liberado)
     {
-        gpioWrite(led, 0); // Apagar LED INMEDIATAMENTE
+        gpioWrite(GPIO_PIN_LED, 0); // Apagar LED INMEDIATAMENTE
         flag_imprimir_liberado = 1; // Levantamos la bandera
     }
 }
@@ -94,10 +94,10 @@ int main(int argc, char const *argv[])
     gpioSetPullUpDown(pin_button, PI_PUD_UP); // Activar resistencia de pull-up interna para el botóns
 
     // FILTRO DE REBOTE: Ignora pulsaciones menores a 30ms (30,000 us) para evitar falsos positivos
-    gpioSetGlitchFilter(pin_button, 30000);
+    gpioGlitchFilter(pin_button, 30000);
 
     // Configurar la interrupción para el botón, detectando tanto el flanco de bajada (presión) como el flanco de subida (liberación)
-    gpioSetAlertFuncEx(pin_button, manejador_interrupcion_boton, &pin_led);
+    gpioSetAlertFunc(pin_button, manejador_interrupcion_boton);
 
     // BUCLE PRINCIPAL (El encargado de las tareas lentas y pesadas)
     while(running)
