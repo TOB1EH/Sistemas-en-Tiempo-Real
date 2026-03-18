@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <signal.h>
+#include <unistd.h>
 #include <pigpio.h>
 
 #define GPIO_PIN_LED 4 // Numero de pin GPIO donde esta conectado el LED (GPIO4, pin fisico 7 en la Raspberry Pi)
@@ -90,7 +91,7 @@ int main(int argc, char const *argv[])
 
     // Bucle infinito que mantiene el programa vivo
     while(running) {
-        time_sleep(1); // Duerme por 1 segundo, despierta, y vuelve a dormir.
+        usleep(10000);
         // Las interrupciones del botón pausarán este sueño automáticamente.
     }
 
