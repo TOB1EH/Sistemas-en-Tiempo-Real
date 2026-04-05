@@ -5,3 +5,6 @@ U1_lab/reloj
 U1_lab/semaforo
 U1_lab/cronometro
 U1_lab/ordenamiento
+*.o
+*.out
+*.exe
