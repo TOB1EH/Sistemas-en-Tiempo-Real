@@ -41,18 +41,25 @@ void* funcion_del_hilo(void* arg)
     // Establecer el planificador a FIFO para garantizar que este hilo tenga prioridad sobre otros hilos y se ejecute completamente antes de que otros hilos puedan ejecutarse, lo que es crucial para responder rápidamente a la presión del botón y cambiar al modo de alerta sin demoras.
     pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
 
+    int alerta_impresa = 0;
+
     // Simular el trabajo de monitoreo del botón y cambio a modo de alerta
-    while (running && !modo_alerta)
+    while (running)
     {
-        if (gpioRead(GPIO_PIN_BUTTON) == 0) // Verificar si el botón fue presionado
-        {
-            pthread_mutex_lock(&mutex); // Bloquear el mutex antes de modificar la variable compartida
-            modo_alerta = 1; // Cambiar al modo de alerta
-            pthread_mutex_unlock(&mutex); // Desbloquear el mutex después de modificar la variable compartida
-            printf("[ALERTA] Parada de emergencia activada - Latencia detectada\n");
-            gpioWrite(GPIO_PIN_LED, 1); // Encender el LED para indicar que estamos en modo de alerta
+
+        if (gpioRead(GPIO_PIN_BUTTON) == 0) {
+            modo_alerta = 1;
+            gpioWrite(GPIO_PIN_LED, 1);
+            if (!alerta_impresa) {
+                printf("[ALERTA] Parada de emergencia activada - Latencia detectada\n");
+                alerta_impresa = 1;
+            }
+        } else {
+            modo_alerta = 0;
+            gpioWrite(GPIO_PIN_LED, 0);
+            alerta_impresa = 0;  // resetear para la próxima presión
         }
-        usleep(10000); // Esperar 10 ms para reducir el uso de CPU, ya que este hilo solo simula trabajo y no necesita ejecutarse a máxima velocidad
+        usleep(10000); // Dormir por 10ms para reducir el uso de CPU, ajusta según la sensibilidad que necesites para detectar el botón
     }
 
     return NULL;
@@ -86,6 +93,7 @@ void iniciar_timer()
     timer.it_interval.tv_usec = 0;
 
     setitimer(ITIMER_REAL, &timer, NULL); // Iniciar el timer (ITIMER_REAL utiliza el tiempo real del sistema para generar señales SIGALRM)
+    // NULL se pasa como tercer argumento porque no necesitamos almacenar el valor anterior del timer.
 }
 
 /**
@@ -98,7 +106,6 @@ void iniciar_timer()
  */
 void handle_signal(int signal)
 {
-    printf("\n\nPrograma interrumpido por el usuario. Finalizando...\n");
     running = 0;
 }
 
@@ -129,7 +136,7 @@ int main(int argc, char const *argv[])
 
     // FILTRO ANTIRREBOTE POR HARDWARE (200,000 microsegundos = 200ms)
     // El hardware filtrará el ruido, manteniendo la CPU libre
-    gpioSetGlitchFilter(GPIO_PIN_BUTTON, 200000);
+    gpioGlitchFilter(GPIO_PIN_BUTTON, 200000);
 
     // Configurar el pin del LED como salida
     gpioSetMode(GPIO_PIN_LED, PI_OUTPUT);
@@ -139,6 +146,7 @@ int main(int argc, char const *argv[])
 
     // Iniciar el timer para la telemetria
     iniciar_timer();
+
     // Crear el hilo que simula el trabajo de monitoreo del botón y cambio a modo de alerta
     pthread_create(&hilo, NULL, funcion_del_hilo, NULL);
 
@@ -148,11 +156,11 @@ int main(int argc, char const *argv[])
     uint32_t ultimo_tick = gpioTick();
     int direccion = 1;
 
-    while(running && !modo_alerta)
+    while(running)
     {
         uint32_t ahora = gpioTick();
 
-        if ((ahora - ultimo_tick) >= INTERVALO_MS) { // ¿cada cuánto mover?
+        if (!modo_alerta && (ahora - ultimo_tick) >= INTERVALO_MS) { // ¿cada cuánto mover?
             pthread_mutex_lock(&mutex); // Bloquear el mutex antes de acceder a la variable compartida
 
             posicion_servo += direccion * INCREMENTO; // Cambiar la posición del servo en la dirección actual
@@ -185,8 +193,10 @@ int main(int argc, char const *argv[])
 
     // Cleanup siempre se ejecuta, sin importar por qué salió el loop
     pthread_join(hilo, NULL);
-    gpioServo(GPIO_PIN_SERVO, 0);
+    gpioServo(GPIO_PIN_SERVO, POSICION_MINIMA); // Mover el servo a la posición segura antes de salir
     gpioTerminate();
+
+    printf("Programa finalizado correctamente.\n");
 
     return 0;
 }
