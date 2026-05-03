@@ -1,0 +1,172 @@
+└──╼ $sudo ./g | python3 plotter_3ejes.py 
+MPU6050 inicializado correctamente
+Hilo productor iniciado. Leyendo sensor a 100 Hz...
+Hilo consumidor iniciado. Esperando datos...
+Muestras leídas: 100 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 100
+Muestras leídas: 200 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 200
+Muestras leídas: 300 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 300
+Muestras leídas: 400 (x=0.24, y=0.86, z=-0.29)
+Datos enviados: 400
+Muestras leídas: 500 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 500
+Muestras leídas: 600 (x=0.24, y=0.86, z=-0.28)
+Datos enviados: 600
+Muestras leídas: 700 (x=0.23, y=0.86, z=-0.29)
+Datos enviados: 700
+Muestras leídas: 800 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 800
+Muestras leídas: 900 (x=0.24, y=0.86, z=-0.28)
+Datos enviados: 900
+Muestras leídas: 1000 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 1000
+Muestras leídas: 1100 (x=0.24, y=0.86, z=-0.28)
+Datos enviados: 1100
+Muestras leídas: 1200 (x=0.23, y=0.86, z=-0.27)
+Datos enviados: 1200
+Muestras leídas: 1300 (x=0.24, y=0.86, z=-0.28)
+Datos enviados: 1300
+Muestras leídas: 1400 (x=0.24, y=0.86, z=-0.28)
+Datos enviados: 1400
+Muestras leídas: 1500 (x=0.24, y=0.86, z=-0.27)
+Datos enviados: 1500
+Muestras leídas: 1600 (x=0.24, y=0.85, z=-0.29)
+Datos enviados: 1600
+Muestras leídas: 1700 (x=0.23, y=0.86, z=-0.28)
+Datos enviados: 1700
+Muestras leídas: 1800 (x=0.54, y=-0.07, z=0.32)
+Datos enviados: 1800
+Muestras leídas: 1900 (x=0.80, y=0.61, z=-0.68)
+Datos enviados: 1900
+Muestras leídas: 2000 (x=0.02, y=-0.16, z=0.94)
+Datos enviados: 2000
+Muestras leídas: 2100 (x=-0.11, y=-0.03, z=0.91)
+Datos enviados: 2100
+Muestras leídas: 2200 (x=1.02, y=0.36, z=-1.01)
+Datos enviados: 2200
+Muestras leídas: 2300 (x=0.14, y=-0.15, z=1.06)
+Datos enviados: 2300
+Muestras leídas: 2400 (x=-0.64, y=0.93, z=1.47)
+Datos enviados: 2400
+Muestras leídas: 2500 (x=-0.20, y=-0.02, z=1.13)
+Datos enviados: 2500
+Muestras leídas: 2600 (x=1.39, y=0.12, z=-0.72)
+Datos enviados: 2600
+Muestras leídas: 2700 (x=-0.85, y=0.50, z=1.32)
+Datos enviados: 2700
+Muestras leídas: 2800 (x=-0.55, y=-0.04, z=0.90)
+Datos enviados: 2800
+Muestras leídas: 2900 (x=0.97, y=0.26, z=-0.77)
+Datos enviados: 2900
+Muestras leídas: 3000 (x=0.43, y=-0.03, z=-0.86)
+Datos enviados: 3000
+Muestras leídas: 3100 (x=-0.48, y=0.86, z=1.54)
+Datos enviados: 3100
+Muestras leídas: 3200 (x=0.47, y=0.17, z=-1.14)
+Datos enviados: 3200
+Muestras leídas: 3300 (x=1.36, y=0.15, z=-0.81)
+Datos enviados: 3300
+Muestras leídas: 3400 (x=-0.74, y=0.60, z=1.77)
+Datos enviados: 3400
+Muestras leídas: 3500 (x=-0.37, y=0.48, z=1.35)
+Datos enviados: 3500
+Muestras leídas: 3600 (x=1.46, y=0.09, z=-1.15)
+Datos enviados: 3600
+Muestras leídas: 3700 (x=0.42, y=0.22, z=0.81)
+Datos enviados: 3700
+Muestras leídas: 3800 (x=-0.32, y=0.22, z=1.54)
+Datos enviados: 3800
+Muestras leídas: 3900 (x=0.68, y=-0.34, z=0.71)
+Datos enviados: 3900
+Muestras leídas: 4000 (x=1.52, y=0.06, z=-1.52)
+Datos enviados: 4000
+Muestras leídas: 4100 (x=0.44, y=0.30, z=0.52)
+Datos enviados: 4100
+Muestras leídas: 4200 (x=0.26, y=-0.13, z=1.06)
+Datos enviados: 4200
+Muestras leídas: 4300 (x=1.37, y=0.21, z=-0.77)
+Datos enviados: 4300
+Muestras leídas: 4400 (x=-0.12, y=0.34, z=1.05)
+Datos enviados: 4400
+Muestras leídas: 4500 (x=-0.32, y=-0.02, z=1.40)
+Datos enviados: 4500
+Muestras leídas: 4600 (x=2.00, y=-0.02, z=-2.00)
+Datos enviados: 4600
+Muestras leídas: 4700 (x=-2.00, y=-0.32, z=1.29)
+Datos enviados: 4700
+Muestras leídas: 4800 (x=-2.00, y=-1.11, z=2.00)
+Datos enviados: 4800
+Muestras leídas: 4900 (x=0.95, y=0.28, z=0.67)
+Datos enviados: 4900
+Muestras leídas: 5000 (x=1.03, y=-0.07, z=-1.03)
+Datos enviados: 5000
+Muestras leídas: 5100 (x=-0.75, y=-0.14, z=2.00)
+Datos enviados: 5100
+Muestras leídas: 5200 (x=-0.62, y=0.45, z=2.00)
+Datos enviados: 5200
+Muestras leídas: 5300 (x=1.60, y=0.46, z=-2.00)
+Datos enviados: 5300
+Muestras leídas: 5400 (x=0.76, y=0.12, z=-1.69)
+Datos enviados: 5400
+Muestras leídas: 5500 (x=0.51, y=-0.46, z=-0.89)
+Datos enviados: 5500
+Muestras leídas: 5600 (x=0.18, y=0.25, z=2.00)
+Datos enviados: 5600
+Muestras leídas: 5700 (x=0.95, y=0.33, z=-0.31)
+Datos enviados: 5700
+Muestras leídas: 5800 (x=1.33, y=-0.07, z=-0.82)
+Datos enviados: 5800
+Muestras leídas: 5900 (x=-0.10, y=0.43, z=1.50)
+Datos enviados: 5900
+Muestras leídas: 6000 (x=0.20, y=0.39, z=0.67)
+Datos enviados: 6000
+Muestras leídas: 6100 (x=1.40, y=0.19, z=-0.65)
+Datos enviados: 6100
+Muestras leídas: 6200 (x=0.72, y=0.14, z=0.62)
+Datos enviados: 6200
+Muestras leídas: 6300 (x=1.23, y=0.19, z=-0.92)
+Datos enviados: 6300
+Muestras leídas: 6400 (x=1.54, y=0.17, z=-0.87)
+Datos enviados: 6400
+Muestras leídas: 6500 (x=0.95, y=0.32, z=0.48)
+Datos enviados: 6500
+Muestras leídas: 6600 (x=-0.40, y=0.15, z=1.70)
+Datos enviados: 6600
+Muestras leídas: 6700 (x=0.73, y=0.46, z=0.99)
+Datos enviados: 6700
+Muestras leídas: 6800 (x=1.19, y=0.58, z=-0.16)
+Datos enviados: 6800
+Muestras leídas: 6900 (x=0.90, y=0.54, z=0.17)
+Datos enviados: 6900
+Muestras leídas: 7000 (x=0.89, y=0.38, z=0.20)
+Datos enviados: 7000
+Muestras leídas: 7100 (x=0.90, y=0.42, z=0.23)
+Datos enviados: 7100
+Muestras leídas: 7200 (x=0.95, y=0.32, z=0.19)
+Datos enviados: 7200
+Muestras leídas: 7300 (x=0.92, y=0.35, z=0.18)
+Datos enviados: 7300
+Muestras leídas: 7400 (x=0.73, y=0.66, z=0.49)
+Datos enviados: 7400
+Muestras leídas: 7500 (x=1.99, y=-0.27, z=-0.86)
+Datos enviados: 7500
+Muestras leídas: 7600 (x=1.03, y=0.58, z=0.97)
+Datos enviados: 7600
+Muestras leídas: 7700 (x=0.20, y=0.35, z=1.55)
+Datos enviados: 7700
+Muestras leídas: 7800 (x=0.57, y=-0.18, z=0.45)
+Datos enviados: 7800
+Muestras leídas: 7900 (x=0.35, y=-0.23, z=0.71)
+Datos enviados: 7900
+Muestras leídas: 8000 (x=0.63, y=0.52, z=1.01)
+Datos enviados: 8000
+Muestras leídas: 8100 (x=0.63, y=-0.54, z=0.09)
+Datos enviados: 8100
+Muestras leídas: 8200 (x=1.08, y=-1.18, z=0.03)
+Datos enviados: 8200
+Muestras leídas: 8300 (x=0.75, y=-0.80, z=-0.12)
+Datos enviados: 8300
+^CHilo productor finalizado
+Hilo consumidor finalizado
