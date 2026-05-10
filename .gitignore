@@ -8,3 +8,40 @@ U1_lab/ordenamiento
 *.o
 *.out
 *.exe
+
+# Librerías compiladas
+*.a
+*.so
+*.so.*
+*.dylib
+
+# Directorios de compilación
+build/
+dist/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+Makefile.local
+
+# IDEs y editores
+.vscode
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Debugging y profiling
+*.gch
+*.dSYM/
+vgcore.*
+core
+core.*
+
+# Archivos de sistema y temporales
+*.log
+*.tmp
+*.bak
+.settings/
